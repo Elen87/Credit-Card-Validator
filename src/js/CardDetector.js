@@ -1,4 +1,12 @@
 
+// Импортируем все изображения для Webpack
+import visaImg from '../img/visa.png';
+import mirImg from '../img/mir.png';
+import americanExpressImg from '../img/american-express.png';
+import jcbImg from '../img/jcb.png';
+import discoverImg from '../img/discover.png';
+import dinersImg from '../img/diners.png';
+
 export default class CardDetector {
   static patterns = {
     visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
@@ -7,6 +15,15 @@ export default class CardDetector {
     jcb: /^(?:2131|1800|35[0-9]{3})[0-9]{11}$/,
     discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
     diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/
+  };
+  
+  static imageMap = {
+    visa: visaImg,
+    mir: mirImg,
+    'american-express': americanExpressImg,
+    jcb: jcbImg,
+    discover: discoverImg,
+    diners: dinersImg
   };
   
   static detect(cardNumber) {
@@ -23,16 +40,10 @@ export default class CardDetector {
   
   static getCardImagePath(cardType) {
     if (!cardType) return null;
-    
-    // Проверка существования типа карты
     const isValid = Object.prototype.hasOwnProperty.call(CardDetector.patterns, cardType);
     if (!isValid) return null;
     
-    // Для тестов используем заглушку
-    if (process.env.NODE_ENV === 'test') {
-      return 'test-image-stub';
-    }
-    
-    return `/img/${cardType}.png`;
+    // Возвращаем импортированное изображение
+    return CardDetector.imageMap[cardType];
   }
 }

@@ -52,33 +52,13 @@ describe('CardDetector', () => {
       expect(CardDetector.getCardImagePath('unknown')).toBe(null);
     });
     
-    test('should return stub for known card type', () => {
-      expect(CardDetector.getCardImagePath('visa')).toBe('test-image-stub');
-      expect(CardDetector.getCardImagePath('mir')).toBe('test-image-stub');
-      expect(CardDetector.getCardImagePath('american-express')).toBe('test-image-stub');
-      expect(CardDetector.getCardImagePath('jcb')).toBe('test-image-stub');
-      expect(CardDetector.getCardImagePath('discover')).toBe('test-image-stub');
-      expect(CardDetector.getCardImagePath('diners')).toBe('test-image-stub');
+    test('should return image for known card type', () => {
+      expect(CardDetector.getCardImagePath('visa')).toBeTruthy();
+      expect(CardDetector.getCardImagePath('mir')).toBeTruthy();
+      expect(CardDetector.getCardImagePath('american-express')).toBeTruthy();
+      expect(CardDetector.getCardImagePath('jcb')).toBeTruthy();
+      expect(CardDetector.getCardImagePath('discover')).toBeTruthy();
+      expect(CardDetector.getCardImagePath('diners')).toBeTruthy();
     });
-  });
-});
-
-// Тесты для проверки ветки production (не会影响 покрытие)
-describe('CardDetector getCardImagePath production branch', () => {
-  const originalEnv = process.env.NODE_ENV;
-  
-  beforeAll(() => {
-    process.env.NODE_ENV = 'production';
-  });
-  
-  afterAll(() => {
-    process.env.NODE_ENV = originalEnv;
-  });
-  
-  test('should return path in production', () => {
-    // Этот тест может не работать из-за мока Jest, но покрытие будет 100%
-    const result = CardDetector.getCardImagePath('visa');
-    // В production должна быть строка, но из-за мока может быть 'test-file-stub'
-    expect(typeof result).toBe('string');
   });
 })

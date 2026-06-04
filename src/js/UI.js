@@ -23,32 +23,10 @@ export default class UI {
     cardTypes.forEach(type => {
       const container = document.getElementById(`card-${type}`);
       if (container) {
-        // Очищаем контейнер
-        container.innerHTML = '';
-        
-        // Создаём изображение
-        const img = document.createElement('img');
-        img.className = 'card-icon';
-        img.alt = type.toUpperCase();
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'contain';
-        
-        // Получаем путь к изображению
-        const imgPath = this.detector.getCardImagePath(type);
-        img.src = imgPath;
-        
-        // Если изображение не загрузилось, показываем текст
-        img.onerror = () => {
-          container.textContent = type.toUpperCase();
-          container.style.fontSize = '10px';
-          container.style.fontWeight = 'bold';
-          container.style.display = 'flex';
-          container.style.alignItems = 'center';
-          container.style.justifyContent = 'center';
-        };
-        
-        container.appendChild(img);
+        const img = container.querySelector('.card-icon');
+        if (img) {
+          img.src = this.detector.getCardImagePath(type);
+        }
       }
     });
   }
@@ -76,7 +54,7 @@ export default class UI {
     const containers = document.querySelectorAll('.card-icon-container');
     containers.forEach(container => {
       container.classList.remove('active');
-      container.style.opacity = '0.4';
+      container.style.opacity = '0.5';
       container.style.filter = 'grayscale(100%)';
     });
     
@@ -103,9 +81,9 @@ export default class UI {
     
     if (isValid) {
       const typeName = this.getCardTypeName(cardType);
-      this.showResult(`✅ Карта ${typeName} действительна!`, 'success');
+      this.showResult(`Карта ${typeName} действительна!`, 'success');
     } else {
-      this.showResult('❌ Неверный номер карты', 'error');
+      this.showResult('Неверный номер карты', 'error');
     }
   }
   
