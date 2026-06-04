@@ -43,7 +43,6 @@ export default class CardDetector {
     const isValid = Object.prototype.hasOwnProperty.call(CardDetector.patterns, cardType);
     if (!isValid) return null;
     
-    // Возвращаем импортированное изображение
     return CardDetector.imageMap[cardType];
   }
 }

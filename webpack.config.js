@@ -1,17 +1,18 @@
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'main.js',
+    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
+    publicPath: '/Credit-Card-Validator/',  // Добавляем publicPath для GitHub Pages
   },
   module: {
     rules: [
       {
-        // Правило для JavaScript файлов
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -19,16 +20,14 @@ module.exports = {
         },
       },
       {
-        // ПРАВИЛО ДЛЯ CSS ФАЙЛОВ
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
       {
-        // ПРАВИЛО ДЛЯ ИЗОБРАЖЕНИЙ (PNG, JPG, GIF)
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'img/[name][ext]', // Сохраняет изображения в папку dist/img
+          filename: 'img/[name][ext]',
         },
       },
     ],
