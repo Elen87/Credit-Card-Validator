@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1780571591833" clover="3.2.0">
-  <project timestamp="1780571591833" name="All files">
+<coverage generated="1780572014015" clover="3.2.0">
+  <project timestamp="1780572014015" name="All files">
     <metrics statements="83" coveredstatements="29" conditionals="40" coveredconditionals="22" methods="18" coveredmethods="4" elements="141" coveredelements="55" complexity="0" loc="83" ncloc="83" packages="1" files="3" classes="3"/>
     <file name="CardDetector.js" path="D:\Users\Redmi\Desktop\Credit-Card-Validator\src\js\CardDetector.js">
       <metrics statements="12" coveredstatements="12" conditionals="10" coveredconditionals="10" methods="2" coveredmethods="2"/>

@@ -6,6 +6,9 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -20,13 +23,15 @@ jobs:
           node-version: '18'
       
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install -g yarn
+          yarn install
       
       - name: Run tests
-        run: npm test
+        run: yarn test
       
       - name: Build
-        run: npm run build
+        run: yarn build
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
